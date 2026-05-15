@@ -53,8 +53,8 @@ function startSimulation() {
       .to('#node-db', { opacity: 1, y: 0, duration: 0.5 })
       .to('#line-2', { opacity: 1, duration: 0.3 })
       
-      .to('#node-office', { opacity: 1, y: 0, duration: 0.5 })
-      .to('#node-mfa', { opacity: 0.3, y: 0, duration: 0.5 }, "-=0.5")
+      .to('#node-mfa', { opacity: 1, y: 0, duration: 0.5 })
+      .to('#node-office', { opacity: 0.3, y: 0, duration: 0.5 }, "-=0.5")
       .to('#line-3', { opacity: 1, duration: 0.3 })
       
       .to('#node-role', { opacity: 1, y: 0, duration: 0.5 })
