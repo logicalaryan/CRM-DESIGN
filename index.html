@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Skill Wanderer - Authentication</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+  </head>
+  <body>
+
+    <main id="app">
+      
+      <!-- ==============================================
+           VIEW 1: SPLIT SCREEN (LOGO + LOGIN)
+      ================================================ -->
+      <section class="split-layout">
+        
+        <!-- LEFT: LOGO -->
+        <div class="left-pane">
+          <!-- Custom SVG matching the SW Logo from Image 2 -->
+          <svg class="logo-svg" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+            <!-- Mountain Lines (Background) -->
+            <path d="M 20 220 L 80 180 L 120 200 L 170 160 L 220 210 L 280 190" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="2"/>
+            <path d="M 50 240 L 100 210 L 160 250 L 210 190 L 260 220" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+            
+            <!-- Red Horizon Curve -->
+            <path d="M 160 220 Q 200 240 240 200" fill="none" stroke="#ef4444" stroke-width="3" opacity="0.6"/>
+
+            <!-- S W Text -->
+            <text x="60" y="130" font-family="Inter, sans-serif" font-weight="800" font-size="70" fill="#f97316" letter-spacing="-5">SW</text>
+            
+            <!-- Sun Circle -->
+            <circle cx="230" cy="90" r="25" fill="#f97316"/>
+            <circle cx="230" cy="90" r="35" fill="none" stroke="#f97316" stroke-width="2" opacity="0.5"/>
+
+            <!-- UFO -->
+            <ellipse cx="140" cy="140" rx="25" ry="6" fill="#fbbf24"/>
+            <path d="M 130 138 Q 140 125 150 138" fill="#f97316"/>
+            
+            <!-- UFO Beam -->
+            <polygon points="135,145 145,145 140,200" fill="#f97316" class="ufo-beam" opacity="0.8"/>
+            <!-- Triangle pointing up -->
+            <polygon points="140,160 135,175 145,175" fill="#110d0b"/>
+          </svg>
+        </div>
+
+        <!-- RIGHT: LOGIN -->
+        <div class="right-pane">
+          <div class="login-wrapper">
+            <div class="glass-panel glowing login-card">
+              <!-- Branding -->
+              <div class="brand-header">
+                <div class="logo-box"><i data-lucide="compass" style="color: white; width: 24px; height: 24px;"></i></div>
+                <h2 class="text-gradient">Skill Wanderer</h2>
+              </div>
+              <p style="text-align: center; color: var(--text-secondary); margin-bottom: 2rem; font-size: 0.9rem;">
+                Secure Enterprise CRM Access
+              </p>
+
+
+
+              <!-- Content: Password Flow -->
+              <div id="flow-password" class="login-flow active-flow">
+                <!-- Social Login -->
+                <div class="social-login-grid">
+                  <button class="btn btn-glass social-btn">
+                    <i data-lucide="cloud" style="width: 18px; margin-right: 5px;"></i> Zoho
+                  </button>
+                  <button class="btn btn-glass social-btn">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linkedin/linkedin-original.svg" width="20"/> LinkedIn
+                  </button>
+                </div>
+
+                <div class="divider">
+                  <span>or</span>
+                </div>
+
+                <!-- Form -->
+                <div class="input-group">
+                  <label>Work Email</label>
+                  <div class="input-wrapper">
+                    <i data-lucide="mail" class="input-icon"></i>
+                    <input type="email" placeholder="admin@skillwanderer.com" value="admin@skillwanderer.com">
+                  </div>
+                </div>
+
+                <div class="input-group" style="margin-top: 1rem;">
+                  <label>Password</label>
+                  <div class="input-wrapper">
+                    <i data-lucide="lock" class="input-icon"></i>
+                    <input type="password" id="password-input" placeholder="••••••••" value="password123">
+                    <button class="eye-btn" id="toggle-eye"><i data-lucide="eye"></i></button>
+                  </div>
+                </div>
+
+                <div style="display: flex; justify-content: space-between; margin-top: 1rem; font-size: 0.85rem;">
+                  <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                    <input type="checkbox" checked style="accent-color: var(--accent-orange);"> Keep me logged in (30 days)
+                  </label>
+                  <a href="#" style="color: var(--accent-orange); text-decoration: none;">Forgot Password?</a>
+                </div>
+
+                <button class="btn btn-primary" id="btn-login" style="width: 100%; margin-top: 1.5rem; font-size: 1.1rem; padding: 1rem;">
+                  Authenticate
+                </button>
+              </div>
+
+
+
+              <div style="margin-top: 2rem; text-align: center; border-top: 1px solid var(--glass-border); padding-top: 1.5rem; font-size: 0.9rem;">
+                <span style="color: var(--text-secondary);">Received an invitation?</span> 
+                <a href="#" style="color: var(--accent-orange); text-decoration: none; font-weight: bold; margin-left: 5px;">Activate Account</a>
+              </div>
+            </div>
+
+            <!-- Connecting Arrow container (Animates on click) -->
+            <div class="connection-arrow-container" id="conn-arrow">
+              <div class="arrow-line"></div>
+              <i data-lucide="chevron-down" class="arrow-head"></i>
+            </div>
+            
+          </div>
+        </div>
+      </section>
+
+      <!-- ==============================================
+           VIEW 2: THE FLOWCHART WORKFLOW (Below Split)
+      ================================================ -->
+      <section id="workflow-section">
+        <h2 class="title-xl" style="text-align: center; margin-bottom: 2rem; font-size: 2.5rem;">Authentication <span class="text-gradient">Workflow</span></h2>
+        
+        <div class="flow-diagram">
+          
+          <!-- LEVEL 1: LOGIN -->
+          <div class="flow-row">
+            <div class="flow-node highlight-orange" id="node-login">
+              <i data-lucide="log-in"></i>
+              <span>User Attempts Login</span>
+              <small>(auth.company.com)</small>
+            </div>
+          </div>
+
+          <!-- Vertical line -->
+          <div class="flow-line vertical" id="line-1"></div>
+
+
+          <!-- LEVEL 2: AUTH DB -->
+          <div class="flow-row">
+            <div class="flow-node highlight-orange" id="node-db">
+              <i data-lucide="database"></i>
+              <span>Auth Database Check</span>
+              <small>Validating Credentials / QR</small>
+            </div>
+          </div>
+
+          <div class="flow-line vertical" id="line-2"></div>
+
+          <!-- LEVEL 3: DEVICE / SECURITY CHECK -->
+          <div class="flow-row" style="gap: 4rem;">
+            <div class="flow-node highlight-warning" id="node-mfa" style="opacity: 0.5;">
+              <i data-lucide="smartphone"></i>
+              <span>Personal Device</span>
+              <small>MFA Required</small>
+            </div>
+            
+            <div class="flow-node highlight-success" id="node-office">
+              <i data-lucide="shield-check"></i>
+              <span>Office Device</span>
+              <small>Trusted Connection</small>
+            </div>
+          </div>
+
+          <div class="flow-line vertical" id="line-3"></div>
+
+
+          <!-- LEVEL 4: ROLE VERIFICATION -->
+          <div class="flow-row">
+            <div class="flow-node highlight-orange" id="node-role">
+              <i data-lucide="users"></i>
+              <span>Verify User Role</span>
+              <small>Admin / Manager / Staff</small>
+            </div>
+          </div>
+
+          <!-- Splitting paths -->
+          <div class="flow-split" id="split-lines">
+             <div class="split-line left"></div>
+             <div class="split-line center"></div>
+             <div class="split-line right"></div>
+          </div>
+
+          <!-- LEVEL 5: DASHBOARDS -->
+          <div class="flow-row" style="align-items: flex-start;">
+            <div class="flow-node highlight-success dashboard-node" id="node-dash-staff">
+              <i data-lucide="user"></i>
+              <span>Staff Dashboard</span>
+              <small>CRM Records Only</small>
+            </div>
+            
+            <div class="flow-node highlight-warning dashboard-node" id="node-dash-manager">
+              <i data-lucide="users"></i>
+              <span>Manager Dashboard</span>
+              <small>HR & CRM Data</small>
+            </div>
+
+            <div class="flow-node highlight-error dashboard-node" id="node-dash-admin">
+              <i data-lucide="crown"></i>
+              <span>Admin Dashboard</span>
+              <small>Finance, HR & CRM</small>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ==============================================
+           VIEW 3: THE INFO MODAL (Hidden initially)
+      ================================================ -->
+      <div id="info-modal-overlay" class="modal-overlay">
+        <div id="info-modal" class="glass-panel glowing modal-content">
+          <button id="close-modal" class="close-btn"><i data-lucide="x"></i></button>
+          <div id="modal-icon-container" class="modal-icon"><i data-lucide="info"></i></div>
+          <h3 id="modal-title" class="text-gradient" style="font-size: 1.8rem; margin-bottom: 2rem;">Title</h3>
+          <div id="mini-flow-container" class="mini-flow-container"></div>
+        </div>
+      </div>
+
+    </main>
+
+    <script type="module" src="/src/main.js"></script>
+    <script>
+      lucide.createIcons();
+    </script>
+  </body>
+</html>
