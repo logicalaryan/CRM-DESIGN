@@ -115,86 +115,161 @@
            VIEW 2: THE FLOWCHART WORKFLOW (Below Split)
       ================================================ -->
       <section id="workflow-section">
-        <h2 class="title-xl" style="text-align: center; margin-bottom: 2rem; font-size: 2.5rem;">Authentication <span class="text-gradient">Workflow</span></h2>
+        <h2 class="title-xl" style="text-align: center; margin-bottom: 2rem; font-size: 2.5rem;">Skill Wanderer CRM - <span class="text-gradient">Login Flow</span></h2>
         
-        <div class="flow-diagram">
+        <div class="flow-diagram-grid" id="flow-diagram-main">
           
-          <!-- LEVEL 1: LOGIN -->
-          <div class="flow-row">
-            <div class="flow-node highlight-orange" id="node-login">
-              <i data-lucide="log-in"></i>
-              <span>User Attempts Login</span>
-              <small>(auth.company.com)</small>
+          <!-- ROW 1: START -->
+          <div style="grid-column: 2; display: flex; flex-direction: column; align-items: center;">
+            <div class="flow-node node-success node-pill" id="node-start">
+              <i data-lucide="play-circle"></i>
+              <span>Start</span>
             </div>
+            <div class="flow-line vertical" id="line-0"></div>
           </div>
 
-          <!-- Vertical line -->
-          <div class="flow-line vertical" id="line-1"></div>
+          <!-- ROW 2: DISPLAY LOGIN -->
+          <div style="grid-column: 2; display: flex; flex-direction: column; align-items: center;">
+            <div class="flow-node node-user-action" id="node-step1">
+              <i data-lucide="monitor"></i>
+              <span>Display Login Interface</span>
+              <small>User sees login screen</small>
+            </div>
+            <div class="flow-line vertical" id="line-1"></div>
+          </div>
 
+          <!-- ROW 3: SUBMIT CREDENTIALS -->
+          <div style="grid-column: 2; display: flex; flex-direction: column; align-items: center;">
+            <div class="flow-node node-user-action" id="node-step2">
+              <i data-lucide="user"></i>
+              <span>User Submits Credentials</span>
+              <small>Email & Password</small>
+            </div>
+            <div class="flow-line vertical" id="line-2"></div>
+          </div>
 
-          <!-- LEVEL 2: AUTH DB -->
-          <div class="flow-row">
-            <div class="flow-node highlight-orange" id="node-db">
+          <!-- ROW 4: VALIDATE INPUTS -->
+          <div style="grid-column: 1; display: flex; align-items: center; justify-content: flex-end; position: relative;">
+            <div class="flow-node node-error" id="node-error1" style="margin-right: 2rem;">
+              <i data-lucide="alert-circle"></i>
+              <span>Validation Error</span>
+              <small>Invalid email format</small>
+            </div>
+            <span class="flow-label no" id="label-no1" style="position: absolute; right: 0; opacity: 0; transform: translateX(20px);">No</span>
+          </div>
+          <div style="grid-column: 2; display: flex; flex-direction: column; align-items: center; position: relative;">
+            <div class="flow-node node-system-check" id="node-step3">
+              <i data-lucide="check-square"></i>
+              <span>Are Inputs Valid?</span>
+            </div>
+            <span class="flow-label green-yes" id="label-yes1" style="opacity: 0; transform: translateY(10px);">Yes</span>
+            <div class="flow-line vertical" id="line-3"></div>
+            <div class="horizontal-line-left" id="line-to-error1" style="left: -3rem; right: auto;"></div>
+          </div>
+
+          <!-- ROW 5: RATE LIMIT -->
+          <div style="grid-column: 1; display: flex; align-items: center; justify-content: flex-end; position: relative;">
+            <div class="flow-node node-error" id="node-error2" style="margin-right: 2rem;">
+              <i data-lucide="shield-alert"></i>
+              <span>Security Lockout</span>
+              <small>Too many attempts</small>
+            </div>
+            <span class="flow-label no" id="label-no2" style="position: absolute; right: 0; opacity: 0; transform: translateX(20px);">No</span>
+          </div>
+          <div style="grid-column: 2; display: flex; flex-direction: column; align-items: center; position: relative;">
+            <div class="flow-node node-system-check" id="node-step4">
+              <i data-lucide="shield"></i>
+              <span>Check Security Rules</span>
+              <small>Rate Limit / Blocked IP?</small>
+            </div>
+            <span class="flow-label green-yes" id="label-yes2" style="opacity: 0; transform: translateY(10px);">Yes</span>
+            <div class="flow-line vertical" id="line-4"></div>
+            <div class="horizontal-line-left" id="line-to-error2" style="left: -3rem; right: auto;"></div>
+          </div>
+
+          <!-- ROW 6: DB QUERY -->
+          <div style="grid-column: 2; display: flex; flex-direction: column; align-items: center;">
+            <div class="flow-node node-user-action" id="node-step5">
               <i data-lucide="database"></i>
-              <span>Auth Database Check</span>
-              <small>Validating Credentials / QR</small>
+              <span>Query Database</span>
+              <small>Look up User Account</small>
             </div>
+            <div class="flow-line vertical" id="line-5"></div>
           </div>
 
-          <div class="flow-line vertical" id="line-2"></div>
-
-          <!-- LEVEL 3: DEVICE / SECURITY CHECK -->
-          <div class="flow-row" style="gap: 4rem;">
-            <div class="flow-node highlight-success" id="node-mfa">
-              <i data-lucide="smartphone"></i>
-              <span>Personal Device</span>
-              <small>MFA Required</small>
+          <!-- ROW 7: CHECK PASSWORD -->
+          <div style="grid-column: 1; display: flex; align-items: center; justify-content: flex-end; position: relative;">
+            <div class="flow-node node-error" id="node-error3" style="margin-right: 2rem;">
+              <i data-lucide="x-circle"></i>
+              <span>Invalid Credentials</span>
+              <small>Password incorrect</small>
             </div>
-            
-            <div class="flow-node highlight-warning" id="node-office" style="opacity: 0.5;">
-              <i data-lucide="shield-check"></i>
-              <span>Office Device</span>
-              <small>Trusted Connection</small>
+            <span class="flow-label no" id="label-no3" style="position: absolute; right: 0; opacity: 0; transform: translateX(20px);">No</span>
+          </div>
+          <div style="grid-column: 2; display: flex; flex-direction: column; align-items: center; position: relative;">
+            <div class="flow-node node-system-check" id="node-step6">
+              <i data-lucide="key"></i>
+              <span>Is Password Correct?</span>
             </div>
+            <span class="flow-label green-yes" id="label-yes3" style="opacity: 0; transform: translateY(10px);">Yes</span>
+            <div class="flow-line vertical" id="line-6"></div>
+            <div class="horizontal-line-left" id="line-to-error3" style="left: -3rem; right: auto;"></div>
           </div>
 
-          <div class="flow-line vertical" id="line-3"></div>
+          <!-- ROW 8: SESSION TOKEN -->
+          <div style="grid-column: 2; display: flex; flex-direction: column; align-items: center;">
+            <div class="flow-node node-user-action" id="node-step7">
+              <i data-lucide="ticket"></i>
+              <span>Generate Session Token</span>
+              <small>Create Secure JWT</small>
+            </div>
+            <div class="flow-line vertical" id="line-7"></div>
+          </div>
 
+          <!-- ROW 9: ACCOUNT ACTIVE? -->
+          <div style="grid-column: 1; display: flex; align-items: center; justify-content: flex-end; position: relative;">
+            <div class="flow-node node-error" id="node-error4" style="margin-right: 2rem;">
+              <i data-lucide="ban"></i>
+              <span>Account Suspended</span>
+              <small>User is deactivated</small>
+            </div>
+            <span class="flow-label no" id="label-no4" style="position: absolute; right: 0; opacity: 0; transform: translateX(20px);">No</span>
+          </div>
+          <div style="grid-column: 2; display: flex; flex-direction: column; align-items: center; position: relative;">
+            <div class="flow-node node-system-check" id="node-step8">
+              <i data-lucide="user-check"></i>
+              <span>Is Account Active?</span>
+            </div>
+            <span class="flow-label green-yes" id="label-yes4" style="opacity: 0; transform: translateY(10px);">Yes</span>
+            <div class="flow-line vertical" id="line-8"></div>
+            <div class="horizontal-line-left" id="line-to-error4" style="left: -3rem; right: auto;"></div>
+          </div>
 
-          <!-- LEVEL 4: ROLE VERIFICATION -->
-          <div class="flow-row">
-            <div class="flow-node highlight-orange" id="node-role">
+          <!-- ROW 10: ROLE & PERMISSIONS -->
+          <div style="grid-column: 2; display: flex; flex-direction: column; align-items: center;">
+            <div class="flow-node node-user-action" id="node-step9">
               <i data-lucide="users"></i>
-              <span>Verify User Role</span>
+              <span>Load Role & Permissions</span>
               <small>Admin / Manager / Staff</small>
             </div>
+            <div class="flow-line vertical" id="line-9"></div>
           </div>
 
-          <!-- Splitting paths -->
-          <div class="flow-split" id="split-lines">
-             <div class="split-line left"></div>
-             <div class="split-line center"></div>
-             <div class="split-line right"></div>
+          <!-- ROW 11: REDIRECT -->
+          <div style="grid-column: 2; display: flex; flex-direction: column; align-items: center;">
+            <div class="flow-node node-success" id="node-step10">
+              <i data-lucide="layout-dashboard"></i>
+              <span>Route to Secure Dashboard</span>
+              <small>Grant Access</small>
+            </div>
+            <div class="flow-line vertical" id="line-10"></div>
           </div>
 
-          <!-- LEVEL 5: DASHBOARDS -->
-          <div class="flow-row" style="align-items: flex-start;">
-            <div class="flow-node highlight-success dashboard-node" id="node-dash-staff">
-              <i data-lucide="user"></i>
-              <span>Staff Dashboard</span>
-              <small>CRM Records Only</small>
-            </div>
-            
-            <div class="flow-node highlight-warning dashboard-node" id="node-dash-manager">
-              <i data-lucide="users"></i>
-              <span>Manager Dashboard</span>
-              <small>HR & CRM Data</small>
-            </div>
-
-            <div class="flow-node highlight-error dashboard-node" id="node-dash-admin">
-              <i data-lucide="crown"></i>
-              <span>Admin Dashboard</span>
-              <small>Finance, HR & CRM</small>
+          <!-- ROW 12: END -->
+          <div style="grid-column: 2; display: flex; flex-direction: column; align-items: center;">
+            <div class="flow-node node-success node-pill" id="node-end">
+              <i data-lucide="check-circle"></i>
+              <span>End</span>
             </div>
           </div>
 

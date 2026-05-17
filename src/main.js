@@ -34,8 +34,10 @@ function startSimulation() {
   gsap.to(connArrow, { opacity: 1, duration: 0.5 });
   
   // Reset workflow elements
-  gsap.set('.flow-node, .flow-line, .flow-split', { opacity: 0, y: 20 });
-  gsap.set('.flow-line, .flow-split', { y: 0 }); 
+  gsap.set('.flow-node, .flow-line, .horizontal-line-left, .horizontal-line-right, .flow-arrow-up, .flow-label', { opacity: 0 });
+  gsap.set('.flow-node', { y: 20 });
+  gsap.set('.flow-label.yes, .flow-label.no', { x: 20 });
+  gsap.set('.flow-label.green-yes', { y: 10 });
 
   // Native smooth scroll to the flowchart
   window.scrollTo({
@@ -47,21 +49,61 @@ function startSimulation() {
   setTimeout(() => {
     const tl = gsap.timeline();
 
-    tl.to('#node-login', { opacity: 1, y: 0, duration: 0.5 })
-      .to('#line-1', { opacity: 1, duration: 0.3 })
+    tl.to('#node-start', { opacity: 1, y: 0, duration: 0.3 })
+      .to('#line-0', { opacity: 1, duration: 0.2 })
+      .to('#node-step1', { opacity: 1, y: 0, duration: 0.4 })
+      .to('#line-1', { opacity: 1, duration: 0.2 })
+      .to('#node-step2', { opacity: 1, y: 0, duration: 0.4 })
+      .to('#line-2', { opacity: 1, duration: 0.2 })
+      .to('#node-step3', { opacity: 1, y: 0, duration: 0.4 })
       
-      .to('#node-db', { opacity: 1, y: 0, duration: 0.5 })
-      .to('#line-2', { opacity: 1, duration: 0.3 })
+      // Error 1: Validation
+      .to('#line-to-error1', { opacity: 1, duration: 0.2 })
+      .to('#node-error1', { opacity: 1, y: 0, duration: 0.4 }, "-=0.2")
+      .to('#label-no1', { opacity: 1, x: 0, duration: 0.2 }, "-=0.4")
       
-      .to('#node-mfa', { opacity: 1, y: 0, duration: 0.5 })
-      .to('#node-office', { opacity: 0.3, y: 0, duration: 0.5 }, "-=0.5")
-      .to('#line-3', { opacity: 1, duration: 0.3 })
+      // Main Path continues
+      .to('#label-yes1', { opacity: 1, y: 0, duration: 0.2 })
+      .to('#line-3', { opacity: 1, duration: 0.2 })
+      .to('#node-step4', { opacity: 1, y: 0, duration: 0.4 })
       
-      .to('#node-role', { opacity: 1, y: 0, duration: 0.5 })
-      .to('#split-lines', { opacity: 1, duration: 0.5 })
+      // Error 2: Security Lockout
+      .to('#line-to-error2', { opacity: 1, duration: 0.2 })
+      .to('#node-error2', { opacity: 1, y: 0, duration: 0.4 }, "-=0.2")
+      .to('#label-no2', { opacity: 1, x: 0, duration: 0.2 }, "-=0.4")
       
-      .to('.dashboard-node', { opacity: 0.4, y: 0, duration: 0.5, stagger: 0.1 })
-      .to('#node-dash-admin', { opacity: 1, scale: 1.05, duration: 0.5, ease: "back.out(1.7)" });
+      // Main Path continues
+      .to('#label-yes2', { opacity: 1, y: 0, duration: 0.2 })
+      .to('#line-4', { opacity: 1, duration: 0.2 })
+      .to('#node-step5', { opacity: 1, y: 0, duration: 0.4 })
+      .to('#line-5', { opacity: 1, duration: 0.2 })
+      .to('#node-step6', { opacity: 1, y: 0, duration: 0.4 })
+      
+      // Error 3: Invalid Credentials
+      .to('#line-to-error3', { opacity: 1, duration: 0.2 })
+      .to('#node-error3', { opacity: 1, y: 0, duration: 0.4 }, "-=0.2")
+      .to('#label-no3', { opacity: 1, x: 0, duration: 0.2 }, "-=0.4")
+      
+      // Main Path continues
+      .to('#label-yes3', { opacity: 1, y: 0, duration: 0.2 })
+      .to('#line-6', { opacity: 1, duration: 0.2 })
+      .to('#node-step7', { opacity: 1, y: 0, duration: 0.4 })
+      .to('#line-7', { opacity: 1, duration: 0.2 })
+      .to('#node-step8', { opacity: 1, y: 0, duration: 0.4 })
+      
+      // Error 4: Account Suspended
+      .to('#line-to-error4', { opacity: 1, duration: 0.2 })
+      .to('#node-error4', { opacity: 1, y: 0, duration: 0.4 }, "-=0.2")
+      .to('#label-no4', { opacity: 1, x: 0, duration: 0.2 }, "-=0.4")
+      
+      // Main Path continues
+      .to('#label-yes4', { opacity: 1, y: 0, duration: 0.2 })
+      .to('#line-8', { opacity: 1, duration: 0.2 })
+      .to('#node-step9', { opacity: 1, y: 0, duration: 0.4 })
+      .to('#line-9', { opacity: 1, duration: 0.2 })
+      .to('#node-step10', { opacity: 1, y: 0, duration: 0.4 })
+      .to('#line-10', { opacity: 1, duration: 0.2 })
+      .to('#node-end', { opacity: 1, y: 0, duration: 0.4 });
   }, 600); // Wait 600ms for scroll
 }
 
@@ -71,91 +113,144 @@ if (btnLogin) btnLogin.addEventListener('click', startSimulation);
 // 4. INTERACTIVE MODALS
 // ==========================================
 const nodeData = {
-  'node-login': {
-    title: 'The Gateway',
-    icon: 'log-in',
+  'node-step1': {
+    title: 'Display Login Interface',
+    icon: 'monitor',
     flowsteps: [
-      { icon: 'keyboard', text: 'Type Credentials' },
-      { icon: 'lock', text: 'Encrypt Data' },
-      { icon: 'zap', text: 'Send via Secure Tunnel' },
-      { icon: 'server', text: 'Reach Auth Server' }
+      { icon: 'globe', text: 'User visits site' },
+      { icon: 'server', text: 'Server sends HTML' },
+      { icon: 'monitor', text: 'Browser renders page' },
+      { icon: 'eye', text: 'User sees login screen' }
     ]
   },
-  'node-db': {
-    title: 'The Vault',
-    icon: 'database',
-    flowsteps: [
-      { icon: 'inbox', text: 'Receive Request' },
-      { icon: 'search', text: 'Find User Account' },
-      { icon: 'key', text: 'Verify Password' },
-      { icon: 'check-square', text: 'Check if Active' },
-      { icon: 'check-circle', text: 'Approve Login' }
-    ]
-  },
-  'node-mfa': {
-    title: 'The Defense',
-    icon: 'smartphone',
-    flowsteps: [
-      { icon: 'map-pin', text: 'Detect New Location' },
-      { icon: 'pause-circle', text: 'Pause Login' },
-      { icon: 'hash', text: 'Generate Unique Code' },
-      { icon: 'message-square', text: 'Send Code to Phone' },
-      { icon: 'user-check', text: 'Verify User Input' }
-    ]
-  },
-  'node-office': {
-    title: 'Trusted Connection',
-    icon: 'shield-check',
-    flowsteps: [
-      { icon: 'globe', text: 'Check IP Address' },
-      { icon: 'building', text: 'Recognize Office' },
-      { icon: 'laptop', text: 'Verify Company Device' },
-      { icon: 'fast-forward', text: 'Skip Extra Checks' },
-      { icon: 'unlock', text: 'Grant Fast Access' }
-    ]
-  },
-  'node-role': {
-    title: 'The Sorting Hat',
-    icon: 'users',
-    flowsteps: [
-      { icon: 'fingerprint', text: 'Read User ID' },
-      { icon: 'briefcase', text: 'Look up Job Title' },
-      { icon: 'list', text: 'Determine Permissions' },
-      { icon: 'eye-off', text: 'Block Restricted Info' },
-      { icon: 'layout', text: 'Load Custom View' }
-    ]
-  },
-  'node-dash-staff': {
-    title: 'Staff Access',
+  'node-step2': {
+    title: 'User Submits Credentials',
     icon: 'user',
     flowsteps: [
-      { icon: 'user-check', text: 'Confirm Staff Role' },
-      { icon: 'lock', text: 'Hide Financials' },
-      { icon: 'lock', text: 'Hide HR Records' },
-      { icon: 'contact', text: 'Unlock Basic CRM' },
-      { icon: 'home', text: 'Welcome to Portal' }
+      { icon: 'keyboard', text: 'Type Email' },
+      { icon: 'key', text: 'Type Password' },
+      { icon: 'check-square', text: 'Check Keep Me Logged In' },
+      { icon: 'mouse-pointer-click', text: 'Click Login' }
     ]
   },
-  'node-dash-manager': {
-    title: 'Manager Access',
+  'node-step3': {
+    title: 'Are Inputs Valid?',
+    icon: 'check-square',
+    flowsteps: [
+      { icon: 'file-search', text: 'Check if empty' },
+      { icon: 'at-sign', text: 'Check email format' },
+      { icon: 'lock', text: 'Check password length' },
+      { icon: 'check-circle', text: 'Valid format' }
+    ]
+  },
+  'node-error1': {
+    title: 'Validation Error',
+    icon: 'alert-circle',
+    flowsteps: [
+      { icon: 'x-circle', text: 'Validation fails' },
+      { icon: 'alert-triangle', text: 'Generate error text' },
+      { icon: 'layout', text: 'Update UI state' },
+      { icon: 'eye', text: 'Display error message' }
+    ]
+  },
+  'node-step4': {
+    title: 'Check Security Rules',
+    icon: 'shield',
+    flowsteps: [
+      { icon: 'globe', text: 'Extract IP Address' },
+      { icon: 'clock', text: 'Check recent attempts' },
+      { icon: 'shield-alert', text: 'Analyze for Bots' },
+      { icon: 'shield-check', text: 'Traffic is safe' }
+    ]
+  },
+  'node-error2': {
+    title: 'Security Lockout',
+    icon: 'shield-alert',
+    flowsteps: [
+      { icon: 'x-octagon', text: 'Threshold exceeded' },
+      { icon: 'lock', text: 'Lock IP for 15 mins' },
+      { icon: 'database', text: 'Log security event' },
+      { icon: 'alert-circle', text: 'Show lockout message' }
+    ]
+  },
+  'node-step5': {
+    title: 'Query Database',
+    icon: 'database',
+    flowsteps: [
+      { icon: 'send', text: 'Send to Auth API' },
+      { icon: 'database', text: 'Query SQL Database' },
+      { icon: 'search', text: 'Find User Record' },
+      { icon: 'download', text: 'Retrieve hashed password' }
+    ]
+  },
+  'node-step6': {
+    title: 'Is Password Correct?',
+    icon: 'key',
+    flowsteps: [
+      { icon: 'lock', text: 'Hash input password' },
+      { icon: 'cpu', text: 'Compute algorithms' },
+      { icon: 'file-diff', text: 'Compare with DB hash' },
+      { icon: 'check', text: 'Hashes match perfectly' }
+    ]
+  },
+  'node-error3': {
+    title: 'Invalid Credentials',
+    icon: 'x-circle',
+    flowsteps: [
+      { icon: 'alert-triangle', text: 'Hashes do not match' },
+      { icon: 'plus-circle', text: 'Increment failed attempts' },
+      { icon: 'layout', text: 'Update UI state' },
+      { icon: 'eye', text: 'Show "Invalid Credentials"' }
+    ]
+  },
+  'node-step7': {
+    title: 'Generate Session Token',
+    icon: 'ticket',
+    flowsteps: [
+      { icon: 'pen-tool', text: 'Sign payload with secret' },
+      { icon: 'ticket', text: 'Create JWT Token' },
+      { icon: 'clock', text: 'Set expiration to 30 days' },
+      { icon: 'hard-drive', text: 'Store in secure HttpOnly cookie' }
+    ]
+  },
+  'node-step8': {
+    title: 'Is Account Active?',
+    icon: 'user-check',
+    flowsteps: [
+      { icon: 'search', text: 'Check account status field' },
+      { icon: 'calendar', text: 'Verify subscription active' },
+      { icon: 'shield', text: 'Check for admin bans' },
+      { icon: 'check-circle', text: 'Account is fully active' }
+    ]
+  },
+  'node-error4': {
+    title: 'Account Suspended',
+    icon: 'ban',
+    flowsteps: [
+      { icon: 'x-circle', text: 'Status is Suspended' },
+      { icon: 'trash-2', text: 'Destroy session token' },
+      { icon: 'mail', text: 'Trigger support email' },
+      { icon: 'alert-circle', text: 'Show suspension notice' }
+    ]
+  },
+  'node-step9': {
+    title: 'Load Role & Permissions',
     icon: 'users',
     flowsteps: [
-      { icon: 'user-check', text: 'Confirm Manager Role' },
-      { icon: 'lock', text: 'Hide Financials' },
-      { icon: 'users', text: 'Unlock Team HR' },
-      { icon: 'edit', text: 'Unlock CRM Editing' },
-      { icon: 'home', text: 'Welcome to Portal' }
+      { icon: 'contact', text: 'Identify user role' },
+      { icon: 'list', text: 'Fetch permissions list' },
+      { icon: 'eye-off', text: 'Filter restricted modules' },
+      { icon: 'layers', text: 'Prepare Dashboard layout' }
     ]
   },
-  'node-dash-admin': {
-    title: 'Admin Access',
-    icon: 'crown',
+  'node-step10': {
+    title: 'Route to Secure Dashboard',
+    icon: 'layout-dashboard',
     flowsteps: [
-      { icon: 'user-check', text: 'Confirm Admin Role' },
-      { icon: 'key', text: 'Grant Master Key' },
-      { icon: 'pie-chart', text: 'Unlock Financials' },
-      { icon: 'users', text: 'Unlock HR Records' },
-      { icon: 'home', text: 'Welcome to Portal' }
+      { icon: 'loader', text: 'Clear loading states' },
+      { icon: 'route', text: 'Update browser URL routing' },
+      { icon: 'layout', text: 'Render CRM components' },
+      { icon: 'home', text: 'User successfully logs in' }
     ]
   }
 };
