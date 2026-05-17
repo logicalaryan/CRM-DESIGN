@@ -1,298 +1,312 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Skill Wanderer - Authentication</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <script src="https://unpkg.com/lucide@latest"></script>
-  </head>
-  <body>
 
-    <main id="app">
-      
-      <!-- ==============================================
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Skill Wanderer - Authentication</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body>
+
+  <main id="app">
+
+    <!-- ==============================================
            VIEW 1: SPLIT SCREEN (LOGO + LOGIN)
       ================================================ -->
-      <section class="split-layout">
-        
-        <!-- LEFT: LOGO -->
-        <div class="left-pane">
-          <!-- Custom SVG matching the SW Logo from Image 2 -->
-          <svg class="logo-svg" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
-            <!-- Mountain Lines (Background) -->
-            <path d="M 20 220 L 80 180 L 120 200 L 170 160 L 220 210 L 280 190" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="2"/>
-            <path d="M 50 240 L 100 210 L 160 250 L 210 190 L 260 220" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
-            
-            <!-- Red Horizon Curve -->
-            <path d="M 160 220 Q 200 240 240 200" fill="none" stroke="#ef4444" stroke-width="3" opacity="0.6"/>
+    <section class="split-layout">
 
-            <!-- S W Text -->
-            <text x="60" y="130" font-family="Inter, sans-serif" font-weight="800" font-size="70" fill="#f97316" letter-spacing="-5">SW</text>
-            
-            <!-- Sun Circle -->
-            <circle cx="230" cy="90" r="25" fill="#f97316"/>
-            <circle cx="230" cy="90" r="35" fill="none" stroke="#f97316" stroke-width="2" opacity="0.5"/>
+      <!-- LEFT: LOGO -->
+      <div class="left-pane">
+        <!-- Custom SVG matching the SW Logo from Image 2 -->
+        <svg class="logo-svg" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+          <!-- Mountain Lines (Background) -->
+          <path d="M 20 220 L 80 180 L 120 200 L 170 160 L 220 210 L 280 190" fill="none" stroke="rgba(255,255,255,0.1)"
+            stroke-width="2" />
+          <path d="M 50 240 L 100 210 L 160 250 L 210 190 L 260 220" fill="none" stroke="rgba(255,255,255,0.05)"
+            stroke-width="1" />
 
-            <!-- UFO -->
-            <ellipse cx="140" cy="140" rx="25" ry="6" fill="#fbbf24"/>
-            <path d="M 130 138 Q 140 125 150 138" fill="#f97316"/>
-            
-            <!-- UFO Beam -->
-            <polygon points="135,145 145,145 140,200" fill="#f97316" class="ufo-beam" opacity="0.8"/>
-            <!-- Triangle pointing up -->
-            <polygon points="140,160 135,175 145,175" fill="#110d0b"/>
-          </svg>
-        </div>
+          <!-- Red Horizon Curve -->
+          <path d="M 160 220 Q 200 240 240 200" fill="none" stroke="#ef4444" stroke-width="3" opacity="0.6" />
 
-        <!-- RIGHT: LOGIN -->
-        <div class="right-pane">
-          <div class="login-wrapper">
-            <div class="glass-panel glowing login-card">
-              <!-- Branding -->
-              <div class="brand-header">
-                <div class="logo-box"><i data-lucide="compass" style="color: white; width: 24px; height: 24px;"></i></div>
-                <h2 class="text-gradient">Skill Wanderer</h2>
-              </div>
-              <p style="text-align: center; color: var(--text-secondary); margin-bottom: 2rem; font-size: 0.9rem;">
-                Secure Enterprise CRM Access
-              </p>
+          <!-- S W Text -->
+          <text x="60" y="130" font-family="Inter, sans-serif" font-weight="800" font-size="70" fill="#f97316"
+            letter-spacing="-5">SW</text>
 
+          <!-- Sun Circle -->
+          <circle cx="230" cy="90" r="25" fill="#f97316" />
+          <circle cx="230" cy="90" r="35" fill="none" stroke="#f97316" stroke-width="2" opacity="0.5" />
 
+          <!-- UFO -->
+          <ellipse cx="140" cy="140" rx="25" ry="6" fill="#fbbf24" />
+          <path d="M 130 138 Q 140 125 150 138" fill="#f97316" />
 
-              <!-- Content: Password Flow -->
-              <div id="flow-password" class="login-flow active-flow">
-
-                <!-- Form -->
-                <div class="input-group">
-                  <label>Work Email</label>
-                  <div class="input-wrapper">
-                    <i data-lucide="mail" class="input-icon"></i>
-                    <input type="email" placeholder="admin@skillwanderer.com" value="admin@skillwanderer.com">
-                  </div>
-                </div>
-
-                <div class="input-group" style="margin-top: 1rem;">
-                  <label>Password</label>
-                  <div class="input-wrapper">
-                    <i data-lucide="lock" class="input-icon"></i>
-                    <input type="password" id="password-input" placeholder="••••••••" value="password123">
-                    <button class="eye-btn" id="toggle-eye"><i data-lucide="eye"></i></button>
-                  </div>
-                </div>
-
-                <div style="display: flex; justify-content: space-between; margin-top: 1rem; font-size: 0.85rem;">
-                  <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
-                    <input type="checkbox" checked style="accent-color: var(--accent-orange);"> Keep me logged in (30 days)
-                  </label>
-                  <a href="#" style="color: var(--accent-orange); text-decoration: none;">Forgot Password?</a>
-                </div>
-
-                <button class="btn btn-primary" id="btn-login" style="width: 100%; margin-top: 1.5rem; font-size: 1.1rem; padding: 1rem;">
-                  Login
-                </button>
-              </div>
-
-
-
-
-            </div>
-
-            <!-- Connecting Arrow container (Animates on click) -->
-            <div class="connection-arrow-container" id="conn-arrow">
-              <div class="arrow-line"></div>
-              <i data-lucide="chevron-down" class="arrow-head"></i>
-            </div>
-            
-          </div>
-        </div>
-      </section>
-
-      <!-- ==============================================
-           VIEW 2: THE FLOWCHART WORKFLOW (Below Split)
-      ================================================ -->
-      <section id="workflow-section">
-        <h2 class="title-xl" style="text-align: center; margin-bottom: 2rem; font-size: 2.5rem;">Skill Wanderer CRM - <span class="text-gradient">Login Flow</span></h2>
-        
-        <div class="flow-diagram-grid" id="flow-diagram-main">
-          
-          <!-- ROW 1: START -->
-          <div style="grid-column: 2; display: flex; flex-direction: column; align-items: center;">
-            <div class="flow-node node-success node-pill" id="node-start">
-              <i data-lucide="play-circle"></i>
-              <span>Start</span>
-            </div>
-            <div class="flow-line vertical" id="line-0"></div>
-          </div>
-
-          <!-- ROW 2: DISPLAY LOGIN -->
-          <div style="grid-column: 2; display: flex; flex-direction: column; align-items: center;">
-            <div class="flow-node node-user-action" id="node-step1">
-              <i data-lucide="monitor"></i>
-              <span>Display Login Interface</span>
-              <small>User sees login screen</small>
-            </div>
-            <div class="flow-line vertical" id="line-1"></div>
-          </div>
-
-          <!-- ROW 3: SUBMIT CREDENTIALS -->
-          <div style="grid-column: 2; display: flex; flex-direction: column; align-items: center;">
-            <div class="flow-node node-user-action" id="node-step2">
-              <i data-lucide="user"></i>
-              <span>User Submits Credentials</span>
-              <small>Email & Password</small>
-            </div>
-            <div class="flow-line vertical" id="line-2"></div>
-          </div>
-
-          <!-- ROW 4: VALIDATE INPUTS -->
-          <div style="grid-column: 1; display: flex; align-items: center; justify-content: flex-end; position: relative;">
-            <div class="flow-node node-error" id="node-error1" style="margin-right: 2rem;">
-              <i data-lucide="alert-circle"></i>
-              <span>Validation Error</span>
-              <small>Invalid email format</small>
-            </div>
-            <span class="flow-label no" id="label-no1" style="position: absolute; right: 0; opacity: 0; transform: translateX(20px);">No</span>
-          </div>
-          <div style="grid-column: 2; display: flex; flex-direction: column; align-items: center; position: relative;">
-            <div class="flow-node node-system-check" id="node-step3">
-              <i data-lucide="check-square"></i>
-              <span>Are Inputs Valid?</span>
-            </div>
-            <span class="flow-label green-yes" id="label-yes1" style="opacity: 0; transform: translateY(10px);">Yes</span>
-            <div class="flow-line vertical" id="line-3"></div>
-            <div class="horizontal-line-left" id="line-to-error1" style="left: -3rem; right: auto;"></div>
-          </div>
-
-          <!-- ROW 5: RATE LIMIT -->
-          <div style="grid-column: 1; display: flex; align-items: center; justify-content: flex-end; position: relative;">
-            <div class="flow-node node-error" id="node-error2" style="margin-right: 2rem;">
-              <i data-lucide="shield-alert"></i>
-              <span>Security Lockout</span>
-              <small>Too many attempts</small>
-            </div>
-            <span class="flow-label no" id="label-no2" style="position: absolute; right: 0; opacity: 0; transform: translateX(20px);">No</span>
-          </div>
-          <div style="grid-column: 2; display: flex; flex-direction: column; align-items: center; position: relative;">
-            <div class="flow-node node-system-check" id="node-step4">
-              <i data-lucide="shield"></i>
-              <span>Check Security Rules</span>
-              <small>Rate Limit / Blocked IP?</small>
-            </div>
-            <span class="flow-label green-yes" id="label-yes2" style="opacity: 0; transform: translateY(10px);">Yes</span>
-            <div class="flow-line vertical" id="line-4"></div>
-            <div class="horizontal-line-left" id="line-to-error2" style="left: -3rem; right: auto;"></div>
-          </div>
-
-          <!-- ROW 6: DB QUERY -->
-          <div style="grid-column: 2; display: flex; flex-direction: column; align-items: center;">
-            <div class="flow-node node-user-action" id="node-step5">
-              <i data-lucide="database"></i>
-              <span>Query Database</span>
-              <small>Look up User Account</small>
-            </div>
-            <div class="flow-line vertical" id="line-5"></div>
-          </div>
-
-          <!-- ROW 7: CHECK PASSWORD -->
-          <div style="grid-column: 1; display: flex; align-items: center; justify-content: flex-end; position: relative;">
-            <div class="flow-node node-error" id="node-error3" style="margin-right: 2rem;">
-              <i data-lucide="x-circle"></i>
-              <span>Invalid Credentials</span>
-              <small>Password incorrect</small>
-            </div>
-            <span class="flow-label no" id="label-no3" style="position: absolute; right: 0; opacity: 0; transform: translateX(20px);">No</span>
-          </div>
-          <div style="grid-column: 2; display: flex; flex-direction: column; align-items: center; position: relative;">
-            <div class="flow-node node-system-check" id="node-step6">
-              <i data-lucide="key"></i>
-              <span>Is Password Correct?</span>
-            </div>
-            <span class="flow-label green-yes" id="label-yes3" style="opacity: 0; transform: translateY(10px);">Yes</span>
-            <div class="flow-line vertical" id="line-6"></div>
-            <div class="horizontal-line-left" id="line-to-error3" style="left: -3rem; right: auto;"></div>
-          </div>
-
-          <!-- ROW 8: SESSION TOKEN -->
-          <div style="grid-column: 2; display: flex; flex-direction: column; align-items: center;">
-            <div class="flow-node node-user-action" id="node-step7">
-              <i data-lucide="ticket"></i>
-              <span>Generate Session Token</span>
-              <small>Create Secure JWT</small>
-            </div>
-            <div class="flow-line vertical" id="line-7"></div>
-          </div>
-
-          <!-- ROW 9: ACCOUNT ACTIVE? -->
-          <div style="grid-column: 1; display: flex; align-items: center; justify-content: flex-end; position: relative;">
-            <div class="flow-node node-error" id="node-error4" style="margin-right: 2rem;">
-              <i data-lucide="ban"></i>
-              <span>Account Suspended</span>
-              <small>User is deactivated</small>
-            </div>
-            <span class="flow-label no" id="label-no4" style="position: absolute; right: 0; opacity: 0; transform: translateX(20px);">No</span>
-          </div>
-          <div style="grid-column: 2; display: flex; flex-direction: column; align-items: center; position: relative;">
-            <div class="flow-node node-system-check" id="node-step8">
-              <i data-lucide="user-check"></i>
-              <span>Is Account Active?</span>
-            </div>
-            <span class="flow-label green-yes" id="label-yes4" style="opacity: 0; transform: translateY(10px);">Yes</span>
-            <div class="flow-line vertical" id="line-8"></div>
-            <div class="horizontal-line-left" id="line-to-error4" style="left: -3rem; right: auto;"></div>
-          </div>
-
-          <!-- ROW 10: ROLE & PERMISSIONS -->
-          <div style="grid-column: 2; display: flex; flex-direction: column; align-items: center;">
-            <div class="flow-node node-user-action" id="node-step9">
-              <i data-lucide="users"></i>
-              <span>Load Role & Permissions</span>
-              <small>Admin / Manager / Staff</small>
-            </div>
-            <div class="flow-line vertical" id="line-9"></div>
-          </div>
-
-          <!-- ROW 11: REDIRECT -->
-          <div style="grid-column: 2; display: flex; flex-direction: column; align-items: center;">
-            <div class="flow-node node-success" id="node-step10">
-              <i data-lucide="layout-dashboard"></i>
-              <span>Route to Secure Dashboard</span>
-              <small>Grant Access</small>
-            </div>
-            <div class="flow-line vertical" id="line-10"></div>
-          </div>
-
-          <!-- ROW 12: END -->
-          <div style="grid-column: 2; display: flex; flex-direction: column; align-items: center;">
-            <div class="flow-node node-success node-pill" id="node-end">
-              <i data-lucide="check-circle"></i>
-              <span>End</span>
-            </div>
-          </div>
-
-        </div>
-      </section>
-
-      <!-- ==============================================
-           VIEW 3: THE INFO MODAL (Hidden initially)
-      ================================================ -->
-      <div id="info-modal-overlay" class="modal-overlay">
-        <div id="info-modal" class="glass-panel glowing modal-content">
-          <button id="close-modal" class="close-btn"><i data-lucide="x"></i></button>
-          <div id="modal-icon-container" class="modal-icon"><i data-lucide="info"></i></div>
-          <h3 id="modal-title" class="text-gradient" style="font-size: 1.8rem; margin-bottom: 2rem;">Title</h3>
-          <div id="mini-flow-container" class="mini-flow-container"></div>
-        </div>
+          <!-- UFO Beam -->
+          <polygon points="135,145 145,145 140,200" fill="#f97316" class="ufo-beam" opacity="0.8" />
+          <!-- Triangle pointing up -->
+          <polygon points="140,160 135,175 145,175" fill="#110d0b" />
+        </svg>
       </div>
 
-    </main>
+      <!-- RIGHT: LOGIN -->
+      <div class="right-pane">
+        <div class="login-wrapper">
+          <div class="glass-panel glowing login-card">
+            <!-- Branding -->
+            <div class="brand-header">
+              <div class="logo-box"><i data-lucide="compass" style="color: white; width: 24px; height: 24px;"></i></div>
+              <h2 class="text-gradient">Skill Wanderer</h2>
+            </div>
+            <p style="text-align: center; color: var(--text-secondary); margin-bottom: 2rem; font-size: 0.9rem;">
+              Secure Enterprise CRM Access
+            </p>
 
-    <script type="module" src="/src/main.js"></script>
-    <script>
-      lucide.createIcons();
-    </script>
-  </body>
+
+
+            <!-- Content: Password Flow -->
+            <div id="flow-password" class="login-flow active-flow">
+
+              <!-- Form -->
+              <div class="input-group">
+                <label>Work Email</label>
+                <div class="input-wrapper">
+                  <i data-lucide="mail" class="input-icon"></i>
+                  <input type="email" placeholder="admin@skillwanderer.com" value="admin@skillwanderer.com">
+                </div>
+              </div>
+
+              <div class="input-group" style="margin-top: 1rem;">
+                <label>Password</label>
+                <div class="input-wrapper">
+                  <i data-lucide="lock" class="input-icon"></i>
+                  <input type="password" id="password-input" placeholder="••••••••" value="password123">
+                  <button class="eye-btn" id="toggle-eye"><i data-lucide="eye"></i></button>
+                </div>
+              </div>
+
+              <div style="display: flex; justify-content: space-between; margin-top: 1rem; font-size: 0.85rem;">
+                <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                  <input type="checkbox" checked style="accent-color: var(--accent-orange);"> Keep me logged in (30
+                  days)
+                </label>
+                <a href="#" style="color: var(--accent-orange); text-decoration: none;">Forgot Password?</a>
+              </div>
+
+              <button class="btn btn-primary" id="btn-login"
+                style="width: 100%; margin-top: 1.5rem; font-size: 1.1rem; padding: 1rem;">
+                Login
+              </button>
+            </div>
+
+
+
+
+          </div>
+
+          <!-- Connecting Arrow container (Animates on click) -->
+          <div class="connection-arrow-container" id="conn-arrow">
+            <div class="arrow-line"></div>
+            <i data-lucide="chevron-down" class="arrow-head"></i>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ==============================================
+           VIEW 2: THE FLOWCHART WORKFLOW (Below Split)
+      ================================================ -->
+    <section id="workflow-section">
+      <h2 class="title-xl" style="text-align: center; margin-bottom: 2rem; font-size: 2.5rem;">Skill Wanderer CRM -
+        <span class="text-gradient">Login Flow</span></h2>
+
+      <div class="flow-diagram-grid" id="flow-diagram-main">
+
+        <!-- ROW 1: START -->
+        <div style="grid-column: 2; display: flex; flex-direction: column; align-items: center;">
+          <div class="flow-node node-success node-pill" id="node-start">
+            <i data-lucide="play-circle"></i>
+            <span>Start</span>
+          </div>
+          <div class="flow-line vertical" id="line-0"></div>
+        </div>
+
+        <!-- ROW 2: DISPLAY LOGIN -->
+        <div style="grid-column: 2; display: flex; flex-direction: column; align-items: center;">
+          <div class="flow-node node-user-action" id="node-step1">
+            <i data-lucide="monitor"></i>
+            <span>Display Login Interface</span>
+            <small>User sees login screen</small>
+          </div>
+          <div class="flow-line vertical" id="line-1"></div>
+        </div>
+
+        <!-- ROW 3: SUBMIT CREDENTIALS -->
+        <div style="grid-column: 2; display: flex; flex-direction: column; align-items: center;">
+          <div class="flow-node node-user-action" id="node-step2">
+            <i data-lucide="user"></i>
+            <span>User Submits Credentials</span>
+            <small>Email & Password</small>
+          </div>
+          <div class="flow-line vertical" id="line-2"></div>
+        </div>
+
+        <!-- ROW 4: VALIDATE INPUTS -->
+        <div style="grid-column: 1; display: flex; align-items: center; justify-content: flex-end; position: relative;">
+          <div class="flow-node node-error" id="node-error1" style="margin-right: 2rem;">
+            <i data-lucide="alert-circle"></i>
+            <span>Validation Error</span>
+            <small>Invalid email format</small>
+          </div>
+          <span class="flow-label no" id="label-no1"
+            style="position: absolute; right: 0; opacity: 0; transform: translateX(20px);">No</span>
+        </div>
+        <div style="grid-column: 2; display: flex; flex-direction: column; align-items: center; position: relative;">
+          <div class="flow-node node-system-check" id="node-step3">
+            <i data-lucide="check-square"></i>
+            <span>Are Inputs Valid?</span>
+          </div>
+          <span class="flow-label green-yes" id="label-yes1" style="opacity: 0; transform: translateY(10px);">Yes</span>
+          <div class="flow-line vertical" id="line-3"></div>
+          <div class="horizontal-line-left" id="line-to-error1" style="left: -3rem; right: auto;"></div>
+        </div>
+
+        <!-- ROW 5: RATE LIMIT -->
+        <div style="grid-column: 1; display: flex; align-items: center; justify-content: flex-end; position: relative;">
+          <div class="flow-node node-error" id="node-error2" style="margin-right: 2rem;">
+            <i data-lucide="shield-alert"></i>
+            <span>Security Lockout</span>
+            <small>Too many attempts</small>
+          </div>
+          <span class="flow-label no" id="label-no2"
+            style="position: absolute; right: 0; opacity: 0; transform: translateX(20px);">No</span>
+        </div>
+        <div style="grid-column: 2; display: flex; flex-direction: column; align-items: center; position: relative;">
+          <div class="flow-node node-system-check" id="node-step4">
+            <i data-lucide="shield"></i>
+            <span>Check Security Rules</span>
+            <small>Rate Limit / Blocked IP?</small>
+          </div>
+          <span class="flow-label green-yes" id="label-yes2" style="opacity: 0; transform: translateY(10px);">Yes</span>
+          <div class="flow-line vertical" id="line-4"></div>
+          <div class="horizontal-line-left" id="line-to-error2" style="left: -3rem; right: auto;"></div>
+        </div>
+
+        <!-- ROW 6: DB QUERY -->
+        <div style="grid-column: 2; display: flex; flex-direction: column; align-items: center;">
+          <div class="flow-node node-user-action" id="node-step5">
+            <i data-lucide="database"></i>
+            <span>Query Database</span>
+            <small>Look up User Account</small>
+          </div>
+          <div class="flow-line vertical" id="line-5"></div>
+        </div>
+
+        <!-- ROW 7: CHECK PASSWORD -->
+        <div style="grid-column: 1; display: flex; align-items: center; justify-content: flex-end; position: relative;">
+          <div class="flow-node node-error" id="node-error3" style="margin-right: 2rem;">
+            <i data-lucide="x-circle"></i>
+            <span>Invalid Credentials</span>
+            <small>Password incorrect</small>
+          </div>
+          <span class="flow-label no" id="label-no3"
+            style="position: absolute; right: 0; opacity: 0; transform: translateX(20px);">No</span>
+        </div>
+        <div style="grid-column: 2; display: flex; flex-direction: column; align-items: center; position: relative;">
+          <div class="flow-node node-system-check" id="node-step6">
+            <i data-lucide="key"></i>
+            <span>Is Password Correct?</span>
+          </div>
+          <span class="flow-label green-yes" id="label-yes3" style="opacity: 0; transform: translateY(10px);">Yes</span>
+          <div class="flow-line vertical" id="line-6"></div>
+          <div class="horizontal-line-left" id="line-to-error3" style="left: -3rem; right: auto;"></div>
+        </div>
+
+        <!-- ROW 8: SESSION TOKEN -->
+        <div style="grid-column: 2; display: flex; flex-direction: column; align-items: center;">
+          <div class="flow-node node-user-action" id="node-step7">
+            <i data-lucide="ticket"></i>
+            <span>Generate Session Token</span>
+            <small>Create Secure JWT</small>
+          </div>
+          <div class="flow-line vertical" id="line-7"></div>
+        </div>
+
+        <!-- ROW 9: ACCOUNT ACTIVE? -->
+        <div style="grid-column: 1; display: flex; align-items: center; justify-content: flex-end; position: relative;">
+          <div class="flow-node node-error" id="node-error4" style="margin-right: 2rem;">
+            <i data-lucide="ban"></i>
+            <span>Account Suspended</span>
+            <small>User is deactivated</small>
+          </div>
+          <span class="flow-label no" id="label-no4"
+            style="position: absolute; right: 0; opacity: 0; transform: translateX(20px);">No</span>
+        </div>
+        <div style="grid-column: 2; display: flex; flex-direction: column; align-items: center; position: relative;">
+          <div class="flow-node node-system-check" id="node-step8">
+            <i data-lucide="user-check"></i>
+            <span>Is Account Active?</span>
+          </div>
+          <span class="flow-label green-yes" id="label-yes4" style="opacity: 0; transform: translateY(10px);">Yes</span>
+          <div class="flow-line vertical" id="line-8"></div>
+          <div class="horizontal-line-left" id="line-to-error4" style="left: -3rem; right: auto;"></div>
+        </div>
+
+        <!-- ROW 10: ROLE & PERMISSIONS -->
+        <div style="grid-column: 2; display: flex; flex-direction: column; align-items: center;">
+          <div class="flow-node node-user-action" id="node-step9">
+            <i data-lucide="users"></i>
+            <span>Load Role & Permissions</span>
+            <small>Admin / Manager / Staff</small>
+          </div>
+          <div class="flow-line vertical" id="line-9"></div>
+        </div>
+
+        <!-- ROW 11: REDIRECT -->
+        <div style="grid-column: 2; display: flex; flex-direction: column; align-items: center;">
+          <div class="flow-node node-success" id="node-step10">
+            <i data-lucide="layout-dashboard"></i>
+            <span>Route to Secure Dashboard</span>
+            <small>Grant Access</small>
+          </div>
+          <div class="flow-line vertical" id="line-10"></div>
+        </div>
+
+        <!-- ROW 12: END -->
+        <div style="grid-column: 2; display: flex; flex-direction: column; align-items: center;">
+          <div class="flow-node node-success node-pill" id="node-end">
+            <i data-lucide="check-circle"></i>
+            <span>End</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==============================================
+           VIEW 3: THE INFO MODAL (Hidden initially)
+      ================================================ -->
+    <div id="info-modal-overlay" class="modal-overlay">
+      <div id="info-modal" class="glass-panel glowing modal-content">
+        <button id="close-modal" class="close-btn"><i data-lucide="x"></i></button>
+        <div id="modal-icon-container" class="modal-icon"><i data-lucide="info"></i></div>
+        <h3 id="modal-title" class="text-gradient" style="font-size: 1.8rem; margin-bottom: 2rem;">Title</h3>
+        <div id="mini-flow-container" class="mini-flow-container"></div>
+      </div>
+    </div>
+
+  </main>
+
+  <script type="module" src="/src/main.js"></script>
+  <script>
+    lucide.createIcons();
+  </script>
+</body>
+
 </html>

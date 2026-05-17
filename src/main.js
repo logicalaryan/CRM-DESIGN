@@ -18,7 +18,7 @@ if (eyeBtn && passInput) {
       passInput.type = 'password';
       eyeBtn.innerHTML = '<i data-lucide="eye"></i>';
     }
-    if(window.lucide) window.lucide.createIcons();
+    if (window.lucide) window.lucide.createIcons();
   });
 }
 
@@ -32,7 +32,7 @@ const connArrow = document.getElementById('conn-arrow');
 function startSimulation() {
   // Show connecting arrow
   gsap.to(connArrow, { opacity: 1, duration: 0.5 });
-  
+
   // Reset workflow elements
   gsap.set('.flow-node, .flow-line, .horizontal-line-left, .horizontal-line-right, .flow-arrow-up, .flow-label', { opacity: 0 });
   gsap.set('.flow-node', { y: 20 });
@@ -56,46 +56,46 @@ function startSimulation() {
       .to('#node-step2', { opacity: 1, y: 0, duration: 0.4 })
       .to('#line-2', { opacity: 1, duration: 0.2 })
       .to('#node-step3', { opacity: 1, y: 0, duration: 0.4 })
-      
+
       // Error 1: Validation
       .to('#line-to-error1', { opacity: 1, duration: 0.2 })
       .to('#node-error1', { opacity: 1, y: 0, duration: 0.4 }, "-=0.2")
       .to('#label-no1', { opacity: 1, x: 0, duration: 0.2 }, "-=0.4")
-      
+
       // Main Path continues
       .to('#label-yes1', { opacity: 1, y: 0, duration: 0.2 })
       .to('#line-3', { opacity: 1, duration: 0.2 })
       .to('#node-step4', { opacity: 1, y: 0, duration: 0.4 })
-      
+
       // Error 2: Security Lockout
       .to('#line-to-error2', { opacity: 1, duration: 0.2 })
       .to('#node-error2', { opacity: 1, y: 0, duration: 0.4 }, "-=0.2")
       .to('#label-no2', { opacity: 1, x: 0, duration: 0.2 }, "-=0.4")
-      
+
       // Main Path continues
       .to('#label-yes2', { opacity: 1, y: 0, duration: 0.2 })
       .to('#line-4', { opacity: 1, duration: 0.2 })
       .to('#node-step5', { opacity: 1, y: 0, duration: 0.4 })
       .to('#line-5', { opacity: 1, duration: 0.2 })
       .to('#node-step6', { opacity: 1, y: 0, duration: 0.4 })
-      
+
       // Error 3: Invalid Credentials
       .to('#line-to-error3', { opacity: 1, duration: 0.2 })
       .to('#node-error3', { opacity: 1, y: 0, duration: 0.4 }, "-=0.2")
       .to('#label-no3', { opacity: 1, x: 0, duration: 0.2 }, "-=0.4")
-      
+
       // Main Path continues
       .to('#label-yes3', { opacity: 1, y: 0, duration: 0.2 })
       .to('#line-6', { opacity: 1, duration: 0.2 })
       .to('#node-step7', { opacity: 1, y: 0, duration: 0.4 })
       .to('#line-7', { opacity: 1, duration: 0.2 })
       .to('#node-step8', { opacity: 1, y: 0, duration: 0.4 })
-      
+
       // Error 4: Account Suspended
       .to('#line-to-error4', { opacity: 1, duration: 0.2 })
       .to('#node-error4', { opacity: 1, y: 0, duration: 0.4 }, "-=0.2")
       .to('#label-no4', { opacity: 1, x: 0, duration: 0.2 }, "-=0.4")
-      
+
       // Main Path continues
       .to('#label-yes4', { opacity: 1, y: 0, duration: 0.2 })
       .to('#line-8', { opacity: 1, duration: 0.2 })
@@ -265,16 +265,16 @@ const btnCloseModal = document.getElementById('close-modal');
 document.querySelectorAll('.flow-node').forEach(node => {
   node.addEventListener('click', () => {
     const data = nodeData[node.id];
-    if(data) {
+    if (data) {
       modalTitle.textContent = data.title;
       modalIconContainer.innerHTML = `<i data-lucide="${data.icon}"></i>`;
-      
+
       // Generate Mini Flowchart HTML
       const processSteps = data.flowsteps.slice(0, -1);
       const outcomeStep = data.flowsteps[data.flowsteps.length - 1];
 
       let flowHTML = `<div class="mini-flow-wrapper">`;
-      
+
       // Top row (process)
       flowHTML += `<div class="mini-process-row">`;
       processSteps.forEach((step, index) => {
@@ -300,25 +300,25 @@ document.querySelectorAll('.flow-node').forEach(node => {
 
       miniFlowContainer.innerHTML = flowHTML;
 
-      if(window.lucide) window.lucide.createIcons();
+      if (window.lucide) window.lucide.createIcons();
 
       // Animate In with staggered timeline
       const modalTl = gsap.timeline();
       modalTl.to(modalOverlay, { opacity: 1, duration: 0.3, pointerEvents: 'auto' })
-             .to(modalContent, { scale: 1, duration: 0.3, ease: 'back.out(1.5)' }, "<")
-             .to('.mini-step-card, .mini-arrow', {
-                opacity: 1,
-                y: 0,
-                duration: 0.4,
-                stagger: 0.1,
-                ease: 'power2.out'
-             }, "-=0.1")
-             .to('.mini-outcome-bar', {
-                opacity: 1,
-                y: 0,
-                duration: 0.5,
-                ease: 'back.out(1.5)'
-             }, "-=0.1");
+        .to(modalContent, { scale: 1, duration: 0.3, ease: 'back.out(1.5)' }, "<")
+        .to('.mini-step-card, .mini-arrow', {
+          opacity: 1,
+          y: 0,
+          duration: 0.4,
+          stagger: 0.1,
+          ease: 'power2.out'
+        }, "-=0.1")
+        .to('.mini-outcome-bar', {
+          opacity: 1,
+          y: 0,
+          duration: 0.5,
+          ease: 'back.out(1.5)'
+        }, "-=0.1");
     }
   });
 });
@@ -328,9 +328,9 @@ function closeModal() {
   gsap.to(modalContent, { scale: 0.9, duration: 0.3 });
 }
 
-if(btnCloseModal) btnCloseModal.addEventListener('click', closeModal);
-if(modalOverlay) {
+if (btnCloseModal) btnCloseModal.addEventListener('click', closeModal);
+if (modalOverlay) {
   modalOverlay.addEventListener('click', (e) => {
-    if(e.target === modalOverlay) closeModal();
+    if (e.target === modalOverlay) closeModal();
   });
 }

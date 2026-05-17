@@ -33,7 +33,11 @@ body {
 .text-gradient {
   color: var(--accent-orange);
 }
-.title-xl { font-weight: 700; }
+
+.title-xl {
+  font-weight: 700;
+}
+
 .badge {
   display: inline-block;
   padding: 0.25rem 0.5rem;
@@ -55,20 +59,24 @@ body {
   border: none;
   transition: all 0.3s ease;
 }
+
 .btn-primary {
   background: var(--accent-orange);
   color: white;
 }
+
 .btn-primary:hover {
   background: #ea580c;
   box-shadow: 0 4px 15px rgba(249, 115, 22, 0.4);
   transform: translateY(-2px);
 }
+
 .btn-glass {
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.1);
   color: white;
 }
+
 .btn-glass:hover {
   background: rgba(255, 255, 255, 0.1);
 }
@@ -113,13 +121,22 @@ body {
   width: 100%;
   max-width: 400px;
 }
+
 .ufo-beam {
   transform-origin: top center;
   animation: beam-pulse 2s infinite alternate ease-in-out;
 }
+
 @keyframes beam-pulse {
-  0% { opacity: 0.3; transform: scaleY(0.9); }
-  100% { opacity: 0.8; transform: scaleY(1.1); }
+  0% {
+    opacity: 0.3;
+    transform: scaleY(0.9);
+  }
+
+  100% {
+    opacity: 0.8;
+    transform: scaleY(1.1);
+  }
 }
 
 .right-pane {
@@ -161,11 +178,12 @@ body {
 
 .login-tabs {
   display: flex;
-  background: rgba(0,0,0,0.3);
+  background: rgba(0, 0, 0, 0.3);
   border-radius: 12px;
   padding: 0.25rem;
   margin-bottom: 2rem;
 }
+
 .tab-btn {
   flex: 1;
   background: transparent;
@@ -180,8 +198,9 @@ body {
   align-items: center;
   justify-content: center;
 }
+
 .tab-btn.active {
-  background: rgba(255,255,255,0.1);
+  background: rgba(255, 255, 255, 0.1);
   color: white;
 }
 
@@ -189,13 +208,21 @@ body {
   display: none;
   animation: fadeIn 0.3s ease;
 }
+
 .login-flow.active-flow {
   display: block;
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .social-login-grid {
@@ -211,11 +238,14 @@ body {
   color: var(--text-secondary);
   margin: 1.5rem 0;
 }
-.divider::before, .divider::after {
+
+.divider::before,
+.divider::after {
   content: '';
   flex: 1;
   border-bottom: 1px solid var(--glass-border);
 }
+
 .divider span {
   padding: 0 10px;
   font-size: 0.85rem;
@@ -243,7 +273,7 @@ body {
 
 .input-wrapper input {
   width: 100%;
-  background: rgba(0,0,0,0.3);
+  background: rgba(0, 0, 0, 0.3);
   border: 1px solid var(--glass-border);
   border-radius: 12px;
   padding: 1rem 1rem 1rem 3rem;
@@ -265,9 +295,18 @@ body {
   color: var(--text-secondary);
   cursor: pointer;
 }
-.eye-btn:hover { color: white; }
 
-.qr-mockup svg { width: 150px; height: 150px; background: white; border-radius: 12px; padding: 10px; }
+.eye-btn:hover {
+  color: white;
+}
+
+.qr-mockup svg {
+  width: 150px;
+  height: 150px;
+  background: white;
+  border-radius: 12px;
+  padding: 10px;
+}
 
 /* -------------------------------------
    CONNECTION ARROW
@@ -280,14 +319,15 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  opacity: 0; /* Hidden until animated */
+  opacity: 0;
+  /* Hidden until animated */
   z-index: 5;
 }
 
 .arrow-line {
   width: 4px;
   height: 60px;
-  background: linear-gradient(to bottom, var(--accent-orange), rgba(249,115,22,0));
+  background: linear-gradient(to bottom, var(--accent-orange), rgba(249, 115, 22, 0));
   animation: flowDown 1s infinite linear;
 }
 
@@ -297,9 +337,19 @@ body {
 }
 
 @keyframes flowDown {
-  0% { transform: translateY(-10px); opacity: 0; }
-  50% { opacity: 1; }
-  100% { transform: translateY(10px); opacity: 0; }
+  0% {
+    transform: translateY(-10px);
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(10px);
+    opacity: 0;
+  }
 }
 
 /* -------------------------------------
@@ -391,7 +441,8 @@ body {
   text-align: center;
   padding: 1rem;
   transition: all 0.3s ease;
-  opacity: 0; /* For GSAP */
+  opacity: 0;
+  /* For GSAP */
   transform: translateY(10px);
 }
 
@@ -419,7 +470,8 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  opacity: 0; /* For GSAP */
+  opacity: 0;
+  /* For GSAP */
 }
 
 .mini-outcome-bar {
@@ -433,7 +485,8 @@ body {
   align-items: center;
   justify-content: center;
   transition: all 0.3s ease;
-  opacity: 0; /* For GSAP */
+  opacity: 0;
+  /* For GSAP */
   transform: translateY(10px);
 }
 
@@ -493,7 +546,8 @@ body {
   text-align: center;
   min-width: 200px;
   backdrop-filter: blur(10px);
-  opacity: 0; /* Hidden for GSAP */
+  opacity: 0;
+  /* Hidden for GSAP */
   transform: translateY(20px);
   cursor: pointer;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -509,26 +563,41 @@ body {
   height: 32px;
   margin-bottom: 0.5rem;
 }
+
 .flow-node span {
   font-weight: bold;
   font-size: 1.1rem;
 }
+
 .flow-node small {
   color: var(--text-secondary);
   font-size: 0.8rem;
   margin-top: 0.25rem;
 }
 
-.highlight-orange { border-color: rgba(249, 115, 22, 0.5); box-shadow: 0 0 20px rgba(249, 115, 22, 0.1); }
-.highlight-orange i { color: var(--accent-orange); }
+.highlight-orange {
+  border-color: rgba(249, 115, 22, 0.5);
+  box-shadow: 0 0 20px rgba(249, 115, 22, 0.1);
+}
+
+.highlight-orange i {
+  color: var(--accent-orange);
+}
 
 /* --- NEW LOGIN FLOW COLORS --- */
 .node-user-action {
   background: rgba(59, 130, 246, 0.1);
   border-color: rgba(59, 130, 246, 0.5);
 }
-.node-user-action i { color: #3b82f6; }
-.node-user-action:hover { box-shadow: 0 10px 25px rgba(59, 130, 246, 0.2); border-color: #3b82f6; }
+
+.node-user-action i {
+  color: #3b82f6;
+}
+
+.node-user-action:hover {
+  box-shadow: 0 10px 25px rgba(59, 130, 246, 0.2);
+  border-color: #3b82f6;
+}
 
 .node-system-check {
   background: rgba(234, 179, 8, 0.1);
@@ -538,22 +607,43 @@ body {
   border-radius: 0;
   padding: 1.5rem 2.5rem;
 }
-.node-system-check i { color: #eab308; }
-.node-system-check:hover { box-shadow: 0 10px 25px rgba(234, 179, 8, 0.2); border-color: #eab308; }
+
+.node-system-check i {
+  color: #eab308;
+}
+
+.node-system-check:hover {
+  box-shadow: 0 10px 25px rgba(234, 179, 8, 0.2);
+  border-color: #eab308;
+}
 
 .node-success {
   background: rgba(34, 197, 94, 0.1);
   border-color: rgba(34, 197, 94, 0.5);
 }
-.node-success i { color: #22c55e; }
-.node-success:hover { box-shadow: 0 10px 25px rgba(34, 197, 94, 0.2); border-color: #22c55e; }
+
+.node-success i {
+  color: #22c55e;
+}
+
+.node-success:hover {
+  box-shadow: 0 10px 25px rgba(34, 197, 94, 0.2);
+  border-color: #22c55e;
+}
 
 .node-error {
   background: rgba(239, 68, 68, 0.1);
   border-color: rgba(239, 68, 68, 0.5);
 }
-.node-error i { color: #ef4444; }
-.node-error:hover { box-shadow: 0 10px 25px rgba(239, 68, 68, 0.2); border-color: #ef4444; }
+
+.node-error i {
+  color: #ef4444;
+}
+
+.node-error:hover {
+  box-shadow: 0 10px 25px rgba(239, 68, 68, 0.2);
+  border-color: #ef4444;
+}
 
 .node-pill {
   border-radius: 9999px;
@@ -593,9 +683,19 @@ body {
   margin: 0.5rem;
   text-align: center;
 }
-.flow-label.yes { color: #ef4444; } /* Matches 'Yes' on error branch */
-.flow-label.no { color: #ef4444; }
-.flow-label.green-yes { color: #22c55e; }
+
+.flow-label.yes {
+  color: #ef4444;
+}
+
+/* Matches 'Yes' on error branch */
+.flow-label.no {
+  color: #ef4444;
+}
+
+.flow-label.green-yes {
+  color: #22c55e;
+}
 
 .horizontal-line-left {
   height: 2px;
@@ -606,6 +706,7 @@ body {
   top: 50%;
   opacity: 0;
 }
+
 .horizontal-line-right {
   height: 2px;
   width: 3rem;
@@ -615,6 +716,7 @@ body {
   top: 50%;
   opacity: 0;
 }
+
 .flow-arrow-up {
   position: absolute;
   top: -4rem;
@@ -625,6 +727,7 @@ body {
   transform: translateX(-50%);
   opacity: 0;
 }
+
 .flow-arrow-up::after {
   content: '';
   position: absolute;
@@ -638,7 +741,8 @@ body {
 /* Lines connecting nodes */
 .flow-line {
   background: var(--glass-border);
-  opacity: 0; /* Hidden for GSAP */
+  opacity: 0;
+  /* Hidden for GSAP */
 }
 
 .flow-line.vertical {
@@ -676,18 +780,22 @@ body {
   .split-layout {
     flex-direction: column;
   }
+
   .left-pane {
     border-right: none;
     border-bottom: 1px solid var(--glass-border);
     min-height: 40vh;
   }
+
   .right-pane {
     min-height: 60vh;
   }
+
   .flow-row {
     flex-direction: column;
     align-items: center;
   }
+
   .flow-split {
     display: none;
   }
