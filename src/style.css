@@ -83,17 +83,7 @@ body {
   box-shadow: 0 4px 15px rgba(255, 255, 255, 0.05);
 }
 
-#btn-linkedin:hover {
-  border-color: rgba(0, 119, 181, 0.5);
-  box-shadow: 0 4px 15px rgba(0, 119, 181, 0.2);
-  background: rgba(0, 119, 181, 0.08);
-}
 
-#btn-zoho:hover {
-  border-color: rgba(248, 188, 6, 0.5);
-  box-shadow: 0 4px 15px rgba(248, 188, 6, 0.2);
-  background: rgba(248, 188, 6, 0.08);
-}
 
 /* Glass Panels */
 .glass-panel {
@@ -239,31 +229,7 @@ body {
   }
 }
 
-.social-login-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1rem;
-}
 
-.divider {
-  display: flex;
-  align-items: center;
-  text-align: center;
-  color: var(--text-secondary);
-  margin: 1.5rem 0;
-}
-
-.divider::before,
-.divider::after {
-  content: '';
-  flex: 1;
-  border-bottom: 1px solid var(--glass-border);
-}
-
-.divider span {
-  padding: 0 10px;
-  font-size: 0.85rem;
-}
 
 .input-group label {
   display: block;
@@ -290,7 +256,7 @@ body {
   background: rgba(0, 0, 0, 0.3);
   border: 1px solid var(--glass-border);
   border-radius: 12px;
-  padding: 1rem 1rem 1rem 3rem;
+  padding: 1rem 3.5rem 1rem 3rem;
   color: white;
   font-size: 1rem;
   outline: none;
@@ -308,6 +274,9 @@ body {
   border: none;
   color: var(--text-secondary);
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .eye-btn:hover {

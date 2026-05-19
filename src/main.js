@@ -109,41 +109,6 @@ function startSimulation() {
 
 if (btnLogin) btnLogin.addEventListener('click', startSimulation);
 
-// ==========================================
-// SOCIAL LOGINS INTERACTION
-// ==========================================
-const btnLinkedin = document.getElementById('btn-linkedin');
-const btnZoho = document.getElementById('btn-zoho');
-
-function handleSocialLogin(button, providerName, originalHTML) {
-  if (button.classList.contains('loading')) return;
-  button.classList.add('loading');
-  button.disabled = true;
-  
-  // Set temporary loading state with spin animation
-  button.innerHTML = `<i data-lucide="loader" class="animate-spin" style="width: 20px; height: 20px;"></i><span>Connecting to ${providerName}...</span>`;
-  if (window.lucide) window.lucide.createIcons();
-
-  setTimeout(() => {
-    // Reset button
-    button.classList.remove('loading');
-    button.disabled = false;
-    button.innerHTML = originalHTML;
-    if (window.lucide) window.lucide.createIcons();
-    
-    // Start login flow simulation
-    startSimulation();
-  }, 1200);
-}
-
-if (btnLinkedin) {
-  const original = btnLinkedin.innerHTML;
-  btnLinkedin.addEventListener('click', () => handleSocialLogin(btnLinkedin, 'LinkedIn', original));
-}
-if (btnZoho) {
-  const original = btnZoho.innerHTML;
-  btnZoho.addEventListener('click', () => handleSocialLogin(btnZoho, 'Zoho', original));
-}
 
 // ==========================================
 // 4. INTERACTIVE MODALS
